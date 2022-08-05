@@ -2,9 +2,11 @@ import {
 	Column,
 	CreateDateColumn,
 	Entity,
+	OneToMany,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 import { v4 } from 'uuid';
+import { Vehicle } from '../Vehicles';
 
 @Entity()
 export class User {
@@ -63,15 +65,30 @@ export class User {
 	@Column({ nullable: false, length: 128 })
 	password: string;
 
+	@OneToMany(() => Vehicle, (vehicle) => vehicle.user, { eager: true })
+	vehicles: Vehicle;
+
 	constructor(
+		id: string,
 		name: string,
 		email: string,
 		cpf: string,
 		phone: string,
 		birthDate: Date,
 		description: string,
-		account_type: string
+		account_type: string,
+		cep: string,
+		state: string,
+		city: string,
+		street: string,
+		address_number: string,
+		complement: string,
+		createdAt: Date,
+		updatedAt: Date,
+		password: string,
+		vehicles: Vehicle
 	) {
+		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.cpf = cpf;
@@ -79,5 +96,15 @@ export class User {
 		this.birthDate = new Date(birthDate);
 		this.description = description;
 		this.account_type = account_type;
+		this.cep = cep;
+		this.state = state;
+		this.city = city;
+		this.street = street;
+		this.address_number = address_number;
+		this.complement = complement;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.password = password;
+		this.vehicles = vehicles;
 	}
 }

@@ -26,7 +26,7 @@ export class User {
 	@Column({ name: 'birth_date' })
 	birthDate: Date;
 
-	@Column({ type: 'text', nullable: false })
+	@Column({ type: 'text', nullable: true })
 	description: string;
 
 	@Column({ length: 20 })

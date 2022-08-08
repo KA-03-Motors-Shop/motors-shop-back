@@ -5,7 +5,6 @@ import {
 	OneToMany,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
-import { v4 } from 'uuid';
 import { Vehicle } from '../Vehicles';
 
 @Entity()
@@ -65,8 +64,8 @@ export class User {
 	@Column({ nullable: false, length: 128 })
 	password: string;
 
-	@OneToMany(() => Vehicle, (vehicle) => vehicle.user, { eager: true })
-	vehicles: Vehicle;
+	// @OneToMany(() => Vehicle, (vehicle) => vehicle.user, { eager: true })
+	// vehicles: Vehicle;
 
 	constructor(
 		id: string,
@@ -86,7 +85,7 @@ export class User {
 		createdAt: Date,
 		updatedAt: Date,
 		password: string,
-		vehicles: Vehicle
+		// vehicles: Vehicle
 	) {
 		this.id = id;
 		this.name = name;
@@ -105,6 +104,6 @@ export class User {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.password = password;
-		this.vehicles = vehicles;
+		// this.vehicles = vehicles;
 	}
 }

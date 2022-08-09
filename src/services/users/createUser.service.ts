@@ -2,6 +2,7 @@ import { AppDataSource } from '../../data-source';
 import { User } from '../../entities/User';
 import { AppError } from '../../errors';
 import { UserCreation } from '../../interfaces/User/user.interface';
+import bcrypt from 'bcrypt';
 
 export const createUserService = async ({
 	name,
@@ -27,6 +28,8 @@ export const createUserService = async ({
 		throw new AppError(400, 'This email already exists');
 	}
 
+	const hashPass = bcrypt.hashSync(password, 10);
+
 	const user = new User(
 		name,
 		email,
@@ -41,7 +44,7 @@ export const createUserService = async ({
 		address_number,
 		complement,
 		account_type,
-		password
+		(password = hashPass)
 	);
 
 	let now = new Date();

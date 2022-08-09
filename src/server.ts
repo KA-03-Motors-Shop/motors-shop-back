@@ -1,9 +1,6 @@
 import { app } from './app';
 
-const port = 3030;
-const host = "localhost"
+const port = process.env.PORT || 3030;
 
-app.listen(port, host);
-console.log(`Servidor rodando em http://${host}:${port}`);
-
-
+app.listen(port);
+console.log(`Servidor rodando em http://localhost:${port}`);

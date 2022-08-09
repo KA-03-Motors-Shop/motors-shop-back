@@ -23,8 +23,9 @@
 	},
 	"scripts": {
 		"dev": "ts-node-dev --transpile-only src/server.ts",
+		"test": "NODE_ENV=test jest --runInBand",
 		"typeorm": "typeorm-ts-node-commonjs",
 		"build": "tsc",
-		"start": "node dist/src/server.ts"
+		"start": "node dist/src/server.js"
 	}
 }

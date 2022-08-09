@@ -1,4 +1,6 @@
 import express from 'express';
+import 'express-async-errors';
+import { handleErrors } from './errors';
 import { useRoutes } from './routes';
 
 const app = express();
@@ -13,5 +15,7 @@ app.get('/', (req, res) => {
 		message: 'Bem-vindo!',
 	});
 });
+
+app.use(handleErrors);
 
 export { app };

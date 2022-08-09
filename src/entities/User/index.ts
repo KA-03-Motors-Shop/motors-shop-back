@@ -5,6 +5,7 @@ import {
 	OneToMany,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
+import { v4 } from 'uuid';
 import { Vehicle } from '../Vehicles';
 
 @Entity()
@@ -45,7 +46,7 @@ export class User {
 	@Column({ length: 10 })
 	address_number: string;
 
-	@Column({ type: 'text' })
+	@Column({ type: 'text', nullable: true })
 	complement: string;
 
 	@Column({ nullable: false, length: 50 })
@@ -54,12 +55,12 @@ export class User {
 	@CreateDateColumn({
 		name: 'created_at',
 	})
-	createdAt: Date;
+	createdAt?: Date;
 
 	@CreateDateColumn({
 		name: 'updated_at',
 	})
-	updatedAt: Date;
+	updatedAt?: Date;
 
 	@Column({ nullable: false, length: 128 })
 	password: string;
@@ -68,26 +69,23 @@ export class User {
 	// vehicles: Vehicle;
 
 	constructor(
-		id: string,
 		name: string,
 		email: string,
 		cpf: string,
 		phone: string,
 		birthDate: Date,
 		description: string,
-		account_type: string,
 		cep: string,
 		state: string,
 		city: string,
 		street: string,
 		address_number: string,
 		complement: string,
-		createdAt: Date,
-		updatedAt: Date,
+		account_type: string,
 		password: string,
 		// vehicles: Vehicle
 	) {
-		this.id = id;
+		this.id = v4();
 		this.name = name;
 		this.email = email;
 		this.cpf = cpf;
@@ -101,8 +99,6 @@ export class User {
 		this.street = street;
 		this.address_number = address_number;
 		this.complement = complement;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
 		this.password = password;
 		// this.vehicles = vehicles;
 	}

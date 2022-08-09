@@ -1,5 +1,6 @@
 import { AppDataSource } from '../../data-source';
 import { Vehicle } from '../../entities/Vehicles';
+import { AppError } from '../../errors';
 import { VehicleCreation } from '../../interfaces/Vehicle/vehicle.interface';
 
 export const createVehicleService = async ({
@@ -25,14 +26,13 @@ export const createVehicleService = async ({
 			vehicle_type,
 			is_active
 		);
-		console.log('service', vehicle);
 
 		await vehicleRepository.save(vehicle);
 
 		return vehicle;
 	} catch (err) {
-		if (err instanceof Error) {
-			throw new Error('vehicle service error');
+		if (err instanceof AppError) {
+			throw new AppError(400, 'vehicle service error');
 		}
 	}
 };

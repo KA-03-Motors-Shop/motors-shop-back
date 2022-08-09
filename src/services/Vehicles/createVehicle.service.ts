@@ -25,7 +25,6 @@ export const createVehicleService = async ({
 			vehicle_type,
 			is_active
 		);
-		console.log('service', vehicle);
 
 		await vehicleRepository.save(vehicle);
 

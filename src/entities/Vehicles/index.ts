@@ -1,4 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { v4 } from 'uuid';
 import { User } from '../User';
 
 @Entity()
@@ -34,7 +35,6 @@ export class Vehicle {
 	// user: User;
 
 	constructor(
-		id: string,
 		advertisement_type: string,
 		title: string,
 		fabrication_year: string,
@@ -42,10 +42,10 @@ export class Vehicle {
 		price: string,
 		description: string,
 		vehicle_type: string,
-		is_active: boolean,
+		is_active: boolean
 		// user: User
 	) {
-		this.id = id;
+		this.id = v4();
 		this.advertisement_type = advertisement_type;
 		this.title = title;
 		this.fabrication_year = fabrication_year;

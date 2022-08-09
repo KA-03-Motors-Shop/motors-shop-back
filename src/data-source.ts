@@ -9,7 +9,7 @@ export const AppDataSource = new DataSource({
 	ssl: false,
 	logging: true,
 	entities: ['src/entities/*/*.ts'],
-	migrations: ['src/migrations/*/*.ts'],
+	migrations: ['src/migrations/*.ts'],
 });
 
 AppDataSource.initialize()

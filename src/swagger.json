@@ -52,8 +52,10 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "object",
-									"$ref": "#/components/schemas/Vehicle"
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Vehicle"
+									}
 								}
 							}
 						}
@@ -151,10 +153,31 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "object",
-									"$ref": "#/components/schemas/Users"
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Users"
+									}
 								}
 							}
+						}
+					}
+				},
+				"examples": {
+					"user": {
+						"value": {
+							"name": "Rafael",
+							"email": "rafael4@email.com",
+							"cpf": 123456789,
+							"phone": "12 9 3456 7890",
+							"birthDate": "1997/07/01",
+							"cep": "12345-567",
+							"state": "AL",
+							"city": "Arapiraca",
+							"street": "Rua da paz",
+							"address_number": 1,
+							"complement": "",
+							"account_type": "seller",
+							"password": "1234"
 						}
 					}
 				}

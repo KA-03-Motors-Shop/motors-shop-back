@@ -1,0 +1,258 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "API motors-shop",
+		"description": "Essa API tem como objetivo reservar e manipular iunformações dos produtos a serem leiloados.",
+		"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:3000",
+			"description": "API de test"
+		}
+	],
+	"paths": {
+		"/vehicles": {
+			"post": {
+				"summary": "Cadastro de veículos",
+				"description": "Essa rota será responsável por cadsatrar os veículos",
+				"tags": ["Vehicles"],
+				"secutiry": [{ "bearerAuth": [] }],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Vehicle"
+							},
+							"examples": {
+								"vehicle": {
+									"value": {
+										"advertisement_type": "Venda",
+										"title": "Corsa",
+										"fabrication_year": "1997",
+										"mileage": "54000",
+										"price": "10000",
+										"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel nisi finibus nibh pretium porttitor.",
+										"vehicle_type": "Car",
+										"is_active": true
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"description": "Lista de veículos cadastrados",
+				"summary": "Lista de veículos cadastrados",
+				"tags": ["Vehicles"],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Vehicle"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/vehicles/{id}": {
+			"get": {
+				"description": "Lista um vehiculo a partir do id",
+				"summary": "Lista um veículo cadastrado",
+				"tags": ["Vehicles"],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "Id do veículo para busca",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Vehicle"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/register": {
+			"post": {
+				"summary": "Cadastro de usuários",
+				"description": "Essa rota será responsável por cadsatrar usuários",
+				"tags": ["Users"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Users"
+							},
+							"examples": {
+								"user": {
+									"value": {
+										"name": "Rafael",
+										"email": "rafael4@email.com",
+										"cpf": 123456789,
+										"phone": "12 9 3456 7890",
+										"birthDate": "1997/07/01",
+										"cep": "12345-567",
+										"state": "AL",
+										"city": "Arapiraca",
+										"street": "Rua da paz",
+										"address_number": 1,
+										"complement": "",
+										"account_type": "seller",
+										"password": "1234"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"400": {
+						"description": "This email already exists"
+					},
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Users"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users": {
+			"get": {
+				"description": "Lista de usuários cadastrados",
+				"summary": "Lista de usuários cadastrados",
+				"tags": ["Users"],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Users"
+									}
+								}
+							}
+						}
+					}
+				},
+				"examples": {
+					"user": {
+						"value": {
+							"name": "Rafael",
+							"email": "rafael4@email.com",
+							"cpf": 123456789,
+							"phone": "12 9 3456 7890",
+							"birthDate": "1997/07/01",
+							"cep": "12345-567",
+							"state": "AL",
+							"city": "Arapiraca",
+							"street": "Rua da paz",
+							"address_number": 1,
+							"complement": "",
+							"account_type": "seller",
+							"password": "1234"
+						}
+					}
+				}
+			}
+		},
+		"/users/{id}": {
+			"get": {
+				"description": "Lista um cadastrado a partir do id",
+				"summary": "Lista um cadastrado",
+				"tags": ["Users"],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "Id do usuário para busca",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Users"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Vehicle": {
+				"type": "object",
+				"properties": {
+					"advertisement_type": { "type": "string" },
+					"title": { "type": "string" },
+					"fabrication_year": { "type": "string" },
+					"mileage": { "type": "string" },
+					"price": { "type": "string" },
+					"description": { "type": "string" },
+					"vehicle_type": { "type": "string" },
+					"is_active": { "type": "boolean" }
+				}
+			},
+			"Users": {
+				"type": "object",
+				"properties": {
+					"name": { "type": "string" },
+					"email": { "type": "string" },
+					"password": { "type": "string" },
+					"cpf": { "type": "string" },
+					"phone": { "type": "string" },
+					"birthDate": { "type": "string" },
+					"description": { "type": "string" },
+					"account_type": { "type": "string" },
+					"cep": { "type": "string" },
+					"state": { "type": "string" },
+					"city": { "type": "string" },
+					"street": { "type": "string" },
+					"address_number": { "type": "string" },
+					"complement": { "type": "string" }
+				}
+			}
+		},
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		}
+	}
+}

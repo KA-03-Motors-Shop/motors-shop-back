@@ -31,7 +31,7 @@ export class Vehicle {
 	@Column({ nullable: false })
 	is_active: boolean;
 
-	@ManyToOne((type) => User, (user) => user.vehicles, { nullable: true })
+	@ManyToOne((type) => User, (user) => user.vehicles)
 	user: User;
 
 	constructor(

@@ -15,16 +15,21 @@ export class VehicleController {
 			vehicle_type,
 			is_active,
 		} = req.body;
-		const vehicle = await createVehicleService({
-			advertisement_type,
-			title,
-			fabrication_year,
-			mileage,
-			price,
-			description,
-			vehicle_type,
-			is_active,
-		});
+		const token = req.headers.authorization;
+
+		const vehicle = await createVehicleService(
+			{
+				advertisement_type,
+				title,
+				fabrication_year,
+				mileage,
+				price,
+				description,
+				vehicle_type,
+				is_active,
+			},
+			token as string
+		);
 
 		return res.status(201).json(vehicle);
 	}

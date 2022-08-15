@@ -33,6 +33,6 @@
 		"test": "NODE_ENV=test jest --runInBand",
 		"typeorm": "typeorm-ts-node-commonjs",
 		"build": "tsc",
-		"start": "node dist/src/server.js"
+		"start": "node dist/server.js"
 	}
 }

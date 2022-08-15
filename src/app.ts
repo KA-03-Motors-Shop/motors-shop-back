@@ -13,6 +13,8 @@ app.use(express.json());
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 useRoutes(app);
+console.log("teste");
+
 
 app.get('/', (req, res) => {
 	res.json({

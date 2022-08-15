@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { AppError } from '../errors';
 
-export const validatedToken = (
+export const validatedTokenMiddleware = (
 	req: Request,
 	_: Response,
 	next: NextFunction

@@ -65,9 +65,8 @@ export class User {
 	@Column({ nullable: false, length: 128 })
 	password: string;
 
-	@OneToMany(() => Vehicle, (vehicle) => vehicle.user, {
+	@OneToMany((type) => Vehicle, (vehicle) => vehicle.user, {
 		eager: true,
-		nullable: true,
 	})
 	vehicles: Vehicle;
 

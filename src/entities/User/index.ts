@@ -65,8 +65,11 @@ export class User {
 	@Column({ nullable: false, length: 128 })
 	password: string;
 
-	// @OneToMany(() => Vehicle, (vehicle) => vehicle.user, { eager: true })
-	// vehicles: Vehicle;
+	@OneToMany(() => Vehicle, (vehicle) => vehicle.user, {
+		eager: true,
+		nullable: true,
+	})
+	vehicles: Vehicle;
 
 	constructor(
 		name: string,
@@ -83,7 +86,7 @@ export class User {
 		complement: string,
 		account_type: string,
 		password: string,
-		// vehicles: Vehicle
+		vehicles: Vehicle
 	) {
 		this.id = v4();
 		this.name = name;
@@ -100,6 +103,6 @@ export class User {
 		this.address_number = address_number;
 		this.complement = complement;
 		this.password = password;
-		// this.vehicles = vehicles;
+		this.vehicles = vehicles;
 	}
 }

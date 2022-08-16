@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { createUserService } from '../../services/users/createUser.service';
 import { listOneUserService } from '../../services/users/listOneUser.service';
 import { listUserService } from '../../services/users/listUsers.service';
+import { loginService } from '../../services/users/login.service';
 
 export class UsersController {
 	static async store(req: Request, res: Response) {
@@ -51,5 +52,15 @@ export class UsersController {
 		const { id } = req.params;
 		const user = await listOneUserService(id);
 		return res.status(200).json(user);
+	}
+
+	static async login(req: Request, res: Response) {
+		const { email, password } = req.body;
+		
+		
+		const token = await loginService({ email, password });
+		console.log(token);
+
+		return res.status(200).json(token);
 	}
 }

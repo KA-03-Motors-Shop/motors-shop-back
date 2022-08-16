@@ -34,8 +34,8 @@ export class Vehicle {
 	@ManyToOne((type) => User, (user) => user.vehicles)
 	user: User;
 
-	@Column({ nullable: true })
-	images: [];
+	// @Column({ nullable: true })
+	// images: [];
 
 	constructor(
 		advertisement_type: string,
@@ -47,7 +47,7 @@ export class Vehicle {
 		vehicle_type: string,
 		is_active: boolean,
 		user: User,
-		images: []
+		// images: []
 	) {
 		this.id = v4();
 		this.advertisement_type = advertisement_type;
@@ -59,6 +59,6 @@ export class Vehicle {
 		this.vehicle_type = vehicle_type;
 		this.is_active = is_active;
 		this.user = user;
-		this.images = images;
+		// this.images = images;
 	}
 }

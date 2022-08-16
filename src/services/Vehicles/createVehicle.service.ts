@@ -15,7 +15,7 @@ export const createVehicleService = async (
 		description,
 		vehicle_type,
 		is_active,
-		images,
+		// images,
 	}: VehicleCreation,
 	token: string
 ) => {

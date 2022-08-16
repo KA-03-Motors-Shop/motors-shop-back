@@ -15,6 +15,7 @@ export const createVehicleService = async (
 		description,
 		vehicle_type,
 		is_active,
+		images,
 	}: VehicleCreation,
 	token: string
 ) => {
@@ -36,7 +37,8 @@ export const createVehicleService = async (
 				description,
 				vehicle_type,
 				is_active,
-				user
+				user,
+				images
 			);
 
 			await vehicleRepository.save(vehicle);

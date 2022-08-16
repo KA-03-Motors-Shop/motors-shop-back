@@ -68,7 +68,7 @@ export class User {
 	@OneToMany((type) => Vehicle, (vehicle) => vehicle.user, {
 		eager: true,
 	})
-	vehicles: Vehicle;
+	vehicles: Vehicle[];
 
 	constructor(
 		name: string,
@@ -84,8 +84,7 @@ export class User {
 		address_number: string,
 		complement: string,
 		account_type: string,
-		password: string,
-		vehicles: Vehicle
+		password: string
 	) {
 		this.id = v4();
 		this.name = name;
@@ -102,6 +101,5 @@ export class User {
 		this.address_number = address_number;
 		this.complement = complement;
 		this.password = password;
-		this.vehicles = vehicles;
 	}
 }

@@ -1,9 +1,7 @@
-import { AppDataSource } from '../../data-source';
-import { User } from '../../entities/User';
 import { AppError } from '../../errors';
+import userRepository from '../../repositories/userRepository';
 
 export const listOneUserService = async (id: string) => {
-	const userRepository = AppDataSource.getRepository(User);
 	const user = await userRepository.findOneBy({ id });
 
 	if (!user) {

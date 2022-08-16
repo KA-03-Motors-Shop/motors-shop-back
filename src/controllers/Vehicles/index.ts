@@ -14,7 +14,6 @@ export class VehicleController {
 			description,
 			vehicle_type,
 			is_active,
-			images,
 		} = req.body;
 		const token = req.headers.authorization;
 
@@ -28,7 +27,6 @@ export class VehicleController {
 				description,
 				vehicle_type,
 				is_active,
-				images
 			},
 			token as string
 		);

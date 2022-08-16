@@ -1,9 +1,7 @@
-import { AppDataSource } from '../../data-source';
-import { Vehicle } from '../../entities/Vehicles';
 import { AppError } from '../../errors';
+import vehicleRepository from "../../repositories/vehicleRepository";
 
 export const listOneVehicleService = async (id: string) => {
-	const vehicleRepository = AppDataSource.getRepository(Vehicle);
 	const vehicle = await vehicleRepository.findOneBy({ id: id });
 
 	if (!vehicle) {

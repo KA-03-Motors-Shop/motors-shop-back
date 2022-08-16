@@ -1,14 +1,11 @@
-import { AppDataSource } from '../../data-source';
-import { User } from '../../entities/User';
 import { AppError } from '../../errors';
 import { userLogin } from '../../interfaces/User/user.interface';
 import bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import 'dotenv/config';
+import userRepository from '../../repositories/userRepository';
 
 export const loginService = async ({ email, password }: userLogin) => {
-	const userRepository = AppDataSource.getRepository(User);
-
 	const found = await userRepository.findOneBy({ email });
 
 	if (!found) {
@@ -23,7 +20,6 @@ export const loginService = async ({ email, password }: userLogin) => {
 
 	const token = jwt.sign(
 		{
-			email: found.email,
 			id: found.id,
 		},
 		process.env.TOKEN_KEY as string,

@@ -1,8 +1,8 @@
-import { AppDataSource } from '../../data-source';
 import { User } from '../../entities/User';
 import { AppError } from '../../errors';
 import { UserCreation } from '../../interfaces/User/user.interface';
 import bcrypt from 'bcrypt';
+import userRepository from '../../repositories/userRepository';
 
 export const createUserService = async ({
 	name,
@@ -20,7 +20,6 @@ export const createUserService = async ({
 	address_number,
 	complement,
 }: UserCreation) => {
-	const userRepository = AppDataSource.getRepository(User);
 
 	const userAlreadyExists = await userRepository.findOneBy({ email });
 

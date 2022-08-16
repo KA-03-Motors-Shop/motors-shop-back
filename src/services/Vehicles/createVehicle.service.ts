@@ -1,9 +1,10 @@
-import { AppDataSource } from '../../data-source';
-import { User } from '../../entities/User';
 import { Vehicle } from '../../entities/Vehicles';
 import { AppError } from '../../errors';
 import * as jwt from 'jsonwebtoken';
 import { VehicleCreation } from '../../interfaces/Vehicle/vehicle.interface';
+import { dataToken } from '../../interfaces/User/user.interface';
+import userRepository from '../../repositories/userRepository';
+import vehicleRepository from '../../repositories/vehicleRepository';
 
 export const createVehicleService = async (
 	{
@@ -15,16 +16,12 @@ export const createVehicleService = async (
 		description,
 		vehicle_type,
 		is_active,
-		// images,
 	}: VehicleCreation,
 	token: string
 ) => {
-	const vehicleRepository = AppDataSource.getRepository(Vehicle);
-	const userRepository = AppDataSource.getRepository(User);
+	const tokenDecode = jwt.decode(token) as dataToken;
 
-	const tokenDecode = jwt.decode(token);
-
-	const user = await userRepository.findOneBy({ id: tokenDecode?.id });
+	const user = await userRepository.findOneBy({ id: tokenDecode.id });
 
 	if (user) {
 		try {
@@ -37,8 +34,7 @@ export const createVehicleService = async (
 				description,
 				vehicle_type,
 				is_active,
-				user,
-				images
+				user
 			);
 
 			await vehicleRepository.save(vehicle);

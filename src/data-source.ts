@@ -23,20 +23,20 @@ const devDataSourceOptions: DataSourceOptions = {
 };
 
 const testDataSourceOptions: DataSourceOptions = {
-	type: 'postgres',
-	url: 'postgres://postgres:postgres@localhost:5434/test_database',
+	type: 'sqlite',
+	database: ':memory:',
+	entities: ['src/entities/**/*.ts'],
 	synchronize: true,
-	logging: false,
-	entities: ['src/entities/*/*.ts'],
-	dropSchema: true,
 };
 
-let currentDataSourceOptions = devDataSourceOptions;
+let currentDataSourceOptions;
 
 if (process.env.NODE_ENV === 'production') {
 	currentDataSourceOptions = prodDataSourceOptions;
 } else if (process.env.NODE_ENV === 'test') {
 	currentDataSourceOptions = testDataSourceOptions;
+} else {
+	currentDataSourceOptions = devDataSourceOptions;
 }
 
 export const AppDataSource = new DataSource(currentDataSourceOptions);

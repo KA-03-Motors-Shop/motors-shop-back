@@ -70,6 +70,9 @@ export class User {
 	})
 	vehicles?: Vehicle[];
 
+	@Column({ nullable: false, length: 32 })
+	color: string;
+
 	constructor(
 		name: string,
 		email: string,
@@ -85,6 +88,7 @@ export class User {
 		complement: string,
 		account_type: string,
 		password: string,
+		color: string
 	) {
 		this.id = v4();
 		this.name = name;
@@ -101,5 +105,6 @@ export class User {
 		this.address_number = address_number;
 		this.complement = complement;
 		this.password = password;
+		this.color = color;
 	}
 }

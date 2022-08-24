@@ -1,20 +1,27 @@
 version: "3.7"
 
 services:
-  api:
-    container_name: motors_shop_back
-    image: node:16-alpine
-    build: .
-    ports:
-      - 3000:3000
-    depends_on:
-      - db
+    db:
+        image: postgres:14-alpine
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=motors_shop_db
+            - POSTGRES_HOST=POSTGRES_HOST
+        volumes:
+            - pgdata:/data/postgres
+        ports:
+            - "5433:5432"
 
-  db:
-    image: postgres:14.2-alpine
-    ports:
-      - 5434:5432
-    environment:
-      - POSTGRES_USER=POSTGRES_USER
-      - POSTGRES_PASSWORD=POSTGRES_PWD
-      - POSTGRES_DB=POSTGRES_DB
+    api:
+        container_name: motors_shop
+        build: .
+        volumes:
+            - .:/app
+        depends_on:
+            - db
+        ports:
+            - "3000:3000"
+volumes:
+    pgdata:
+        driver: local

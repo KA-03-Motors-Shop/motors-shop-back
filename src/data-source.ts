@@ -14,7 +14,11 @@ const prodDataSourceOptions: DataSourceOptions = {
 
 const devDataSourceOptions: DataSourceOptions = {
 	type: 'postgres',
-	url: process.env.DATABASE_URL,
+	host: process.env.POSTGRES_HOST,
+	port: 5432,
+	username: process.env.POSTGRES_USER,
+	password: process.env.POSTGRES_PASSWORD,
+	database: process.env.POSTGRES_DB,
 	ssl: false,
 	synchronize: false,
 	logging: true,
@@ -42,6 +46,8 @@ if (process.env.NODE_ENV === 'production') {
 export const AppDataSource = new DataSource(currentDataSourceOptions);
 
 if (process.env.NODE_ENV !== 'test') {
+	console.log('if do inicializado do data source');
+
 	AppDataSource.initialize()
 		.then(() => {
 			console.log('Data source initialized');

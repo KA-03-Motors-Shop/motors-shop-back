@@ -1,22 +1,15 @@
-FROM node:16
+FROM node:16-alpine
 
-RUN apt-get update
+USER root
 
-#Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available
+COPY ["package.json", "yarn.lock"]
 
-COPY ["package*.json", "yarn.lock"] .
-
-RUN yarn 
+RUN yarn
 
 COPY . .
 
-EXPOSE 3030
+EXPOSE 3000
 
-USER node
-
-CMD [ "yarn", "start" ]
+CMD ["yarn", "dev"]

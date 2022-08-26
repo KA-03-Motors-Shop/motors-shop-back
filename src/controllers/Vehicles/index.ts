@@ -14,6 +14,7 @@ export class VehicleController {
 			description,
 			vehicle_type,
 			is_active,
+			images,
 		} = req.body;
 		const token = req.headers.authorization;
 
@@ -28,7 +29,8 @@ export class VehicleController {
 				vehicle_type,
 				is_active,
 			},
-			token as string
+			token as string,
+			images
 		);
 
 		return res.status(201).json(vehicle);

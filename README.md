@@ -1,11 +1,12 @@
 # Motors Shop Api
 
-## Instruções para iniciar a aplicação
+## Instructions to start the application
 
-### Após clonar o repositório
+### After cloning the repository
 
-Instale as dependências do projeto 
-  - `yarn install`
+You need to have [docker](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/) installed on your environment
 
-Iniciar o servidor em ambiente de desenvolvimento
-  - `yarn dev`
+ - Run the command `sudo docker-compose up` to start the application in the docker container
+ - Run the command `docker exec tools_hub yarn typeorm migration:run -d src/data-source.ts` to run the typeorm migrations
+ 
+You can access the api documentation at [localhost](http://localhost:3000/api-docs/)

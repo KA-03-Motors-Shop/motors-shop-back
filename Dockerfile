@@ -2,7 +2,7 @@ FROM node:16-alpine
 
 USER root
 
-WORKDIR /app
+WORKDIR /app/src/
 
 COPY ["package.json", "yarn.lock"]
 

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { createVehicleService } from '../../services/Vehicles/createVehicle.service';
 import { listOneVehicleService } from '../../services/Vehicles/listOneVehicle.service';
 import { listVehicleService } from '../../services/Vehicles/listVehicles.service';
+import { listVehiclesByType } from '../../services/Vehicles/listVehiclesByType.service';
 
 export class VehicleController {
 	static async store(req: Request, res: Response) {
@@ -37,6 +38,14 @@ export class VehicleController {
 	}
 
 	static async list(req: Request, res: Response) {
+		const { type } = req.query;
+
+		if (type) {
+			const vehiclesByType = await listVehiclesByType(type as string);
+
+			return res.status(200).json(vehiclesByType);
+		}
+
 		const vehicles = await listVehicleService();
 
 		return res.status(200).json(vehicles);

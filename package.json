@@ -41,6 +41,6 @@
 		"test": "NODE_ENV=test jest",
 		"typeorm": "typeorm-ts-node-commonjs",
 		"build": "tsc",
-		"start": "node /app/dist/server.js"
+		"start": "node ./dist/server.js"
 	}
 }

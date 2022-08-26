@@ -21,6 +21,7 @@ export class UsersController {
 			address_number,
 			complement,
 			password,
+			color,
 		} = req.body;
 
 		const user = await createUserService({
@@ -38,6 +39,7 @@ export class UsersController {
 			address_number,
 			complement,
 			password,
+			color,
 		});
 
 		return res.status(201).json(user);
@@ -56,10 +58,8 @@ export class UsersController {
 
 	static async login(req: Request, res: Response) {
 		const { email, password } = req.body;
-		
-		
+
 		const token = await loginService({ email, password });
-		console.log(token);
 
 		return res.status(200).json(token);
 	}

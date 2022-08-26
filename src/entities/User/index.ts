@@ -5,7 +5,6 @@ import {
 	OneToMany,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
-import { v4 } from 'uuid';
 import { Vehicle } from '../Vehicles';
 
 @Entity()
@@ -70,8 +69,8 @@ export class User {
 	})
 	vehicles?: Vehicle[];
 
-	// @Column({ nullable: false, length: 32 })
-	// color: string;
+	@Column({ nullable: false, length: 16, default: 'var(--random1)' })
+	color: string;
 
 	constructor(
 		name: string,
@@ -88,9 +87,8 @@ export class User {
 		complement: string,
 		account_type: string,
 		password: string,
-		// color: string
+		color: string
 	) {
-		this.id = v4();
 		this.name = name;
 		this.email = email;
 		this.cpf = cpf;
@@ -105,6 +103,6 @@ export class User {
 		this.address_number = address_number;
 		this.complement = complement;
 		this.password = password;
-		// this.color = color;
+		this.color = color;
 	}
 }

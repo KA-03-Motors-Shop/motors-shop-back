@@ -46,8 +46,6 @@ if (process.env.NODE_ENV === 'production') {
 export const AppDataSource = new DataSource(currentDataSourceOptions);
 
 if (process.env.NODE_ENV !== 'test') {
-	console.log('if do inicializado do data source');
-
 	AppDataSource.initialize()
 		.then(() => {
 			console.log('Data source initialized');

@@ -56,10 +56,8 @@ export class UsersController {
 
 	static async login(req: Request, res: Response) {
 		const { email, password } = req.body;
-		
-		
+
 		const token = await loginService({ email, password });
-		console.log(token);
 
 		return res.status(200).json(token);
 	}

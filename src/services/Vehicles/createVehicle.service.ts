@@ -20,7 +20,7 @@ export const createVehicleService = async (
 		is_active,
 	}: VehicleCreation,
 	token: string,
-	images: string
+	images: string[]
 ) => {
 	const tokenDecode = jwt.decode(token) as dataToken;
 
@@ -42,11 +42,12 @@ export const createVehicleService = async (
 
 			await vehicleRepository.save(vehicle);
 
-			const newImage = new Image(images, vehicle);
+			images.forEach(async (img) => {
+				let newImage = new Image(img, vehicle);
+				await imageRepository.save(newImage);
+			});
 
-			await imageRepository.save(newImage);
-
-			return vehicle;
+			return { vehicle: vehicle, images: images };
 		} catch (err) {
 			if (err instanceof AppError) {
 				throw new AppError(400, 'vehicle service error');

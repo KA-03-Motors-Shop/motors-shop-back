@@ -1,5 +1,11 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { v4 } from 'uuid';
+import {
+	Column,
+	Entity,
+	ManyToOne,
+	OneToMany,
+	PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Image } from '../Images';
 import { User } from '../User';
 
 @Entity()
@@ -16,26 +22,26 @@ export class Vehicle {
 	@Column({ nullable: false, length: 4 })
 	fabrication_year: string;
 
-	@Column({ nullable: false, length: 64 })
+	@Column({ nullable: false, length: 8 })
 	mileage: string;
 
-	@Column({ nullable: false, length: 32 })
+	@Column({ nullable: false, length: 16 })
 	price: string;
 
 	@Column({ nullable: false, type: 'text' })
 	description: string;
 
-	@Column({ nullable: false, length: 128 })
+	@Column({ nullable: false, length: 16 })
 	vehicle_type: string;
 
-	@Column({ nullable: false })
+	@Column({ nullable: false, default: true })
 	is_active: boolean;
 
 	@ManyToOne((type) => User, (user) => user.vehicles)
 	user: User;
 
-	// @Column({ nullable: true })
-	// images: [];
+	@OneToMany((type) => Image, (images) => images.vehicle, { eager: true })
+	images: Image;
 
 	constructor(
 		advertisement_type: string,
@@ -46,10 +52,8 @@ export class Vehicle {
 		description: string,
 		vehicle_type: string,
 		is_active: boolean,
-		user: User,
-		// images: []
+		user: User
 	) {
-		this.id = v4();
 		this.advertisement_type = advertisement_type;
 		this.title = title;
 		this.fabrication_year = fabrication_year;
@@ -59,6 +63,5 @@ export class Vehicle {
 		this.vehicle_type = vehicle_type;
 		this.is_active = is_active;
 		this.user = user;
-		// this.images = images;
 	}
 }

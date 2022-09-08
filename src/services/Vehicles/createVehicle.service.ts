@@ -5,6 +5,8 @@ import { VehicleCreation } from '../../interfaces/Vehicle/vehicle.interface';
 import { dataToken } from '../../interfaces/User/user.interface';
 import userRepository from '../../repositories/userRepository';
 import vehicleRepository from '../../repositories/vehicleRepository';
+import { Image } from '../../entities/Images';
+import imageRepository from '../../repositories/imageRepository';
 
 export const createVehicleService = async (
 	{
@@ -17,7 +19,8 @@ export const createVehicleService = async (
 		vehicle_type,
 		is_active,
 	}: VehicleCreation,
-	token: string
+	token: string,
+	images: string[]
 ) => {
 	const tokenDecode = jwt.decode(token) as dataToken;
 
@@ -39,7 +42,12 @@ export const createVehicleService = async (
 
 			await vehicleRepository.save(vehicle);
 
-			return vehicle;
+			images.forEach(async (img) => {
+				let newImage = new Image(img, vehicle);
+				await imageRepository.save(newImage);
+			});
+
+			return { vehicle: vehicle, images: images };
 		} catch (err) {
 			if (err instanceof AppError) {
 				throw new AppError(400, 'vehicle service error');

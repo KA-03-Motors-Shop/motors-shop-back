@@ -19,8 +19,8 @@ export const createUserService = async ({
 	street,
 	address_number,
 	complement,
+	color,
 }: UserCreation) => {
-
 	const userAlreadyExists = await userRepository.findOneBy({ email });
 
 	if (userAlreadyExists) {
@@ -43,7 +43,8 @@ export const createUserService = async ({
 		address_number,
 		complement,
 		account_type,
-		(password = hashPass)
+		(password = hashPass),
+		color
 	);
 
 	let now = new Date();

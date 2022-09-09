@@ -5,7 +5,6 @@ import {
 	OneToMany,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
-import { v4 } from 'uuid';
 import { Vehicle } from '../Vehicles';
 
 @Entity()
@@ -19,10 +18,10 @@ export class User {
 	@Column({ nullable: false, unique: true, length: 128 })
 	email: string;
 
-	@Column({ nullable: false, length: 20 })
+	@Column({ nullable: false, length: 16 })
 	cpf: string;
 
-	@Column({ nullable: false, length: 20 })
+	@Column({ nullable: false, length: 16 })
 	phone: string;
 
 	@Column({ name: 'birth_date' })
@@ -31,36 +30,36 @@ export class User {
 	@Column({ type: 'text', nullable: true })
 	description: string;
 
-	@Column({ length: 20 })
+	@Column({ length: 16 })
 	cep: string;
 
-	@Column({ length: 128 })
+	@Column({ length: 32 })
 	state: string;
 
-	@Column({ length: 128 })
+	@Column({ length: 32 })
 	city: string;
 
 	@Column({ length: 128 })
 	street: string;
 
-	@Column({ length: 10 })
+	@Column({ length: 8 })
 	address_number: string;
 
 	@Column({ type: 'text', nullable: true })
 	complement: string;
 
-	@Column({ nullable: false, length: 50 })
+	@Column({ nullable: false, length: 32 })
 	account_type: string;
 
 	@CreateDateColumn({
 		name: 'created_at',
 	})
-	createdAt?: Date;
+	createdAt: Date;
 
 	@CreateDateColumn({
 		name: 'updated_at',
 	})
-	updatedAt?: Date;
+	updatedAt: Date;
 
 	@Column({ nullable: false, length: 128 })
 	password: string;
@@ -68,10 +67,10 @@ export class User {
 	@OneToMany((type) => Vehicle, (vehicle) => vehicle.user, {
 		eager: true,
 	})
-	vehicles?: Vehicle[];
+	vehicles: Vehicle[];
 
-	// @Column({ nullable: false, length: 32 })
-	// color: string;
+	@Column({ nullable: false, length: 32, default: 'var(--random1)' })
+	color: string;
 
 	constructor(
 		name: string,
@@ -88,9 +87,8 @@ export class User {
 		complement: string,
 		account_type: string,
 		password: string,
-		// color: string
+		color: string
 	) {
-		this.id = v4();
 		this.name = name;
 		this.email = email;
 		this.cpf = cpf;
@@ -105,6 +103,6 @@ export class User {
 		this.address_number = address_number;
 		this.complement = complement;
 		this.password = password;
-		// this.color = color;
+		this.color = color;
 	}
 }

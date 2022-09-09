@@ -21,6 +21,7 @@ export class UsersController {
 			address_number,
 			complement,
 			password,
+			color,
 		} = req.body;
 
 		const user = await createUserService({
@@ -38,6 +39,7 @@ export class UsersController {
 			address_number,
 			complement,
 			password,
+			color,
 		});
 
 		return res.status(201).json(user);

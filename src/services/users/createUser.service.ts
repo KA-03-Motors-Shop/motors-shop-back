@@ -52,6 +52,8 @@ export const createUserService = async ({
 	user.createdAt = now;
 	user.updatedAt = now;
 
+	userRepository.create(user);
+
 	await userRepository.save(user);
 
 	return user;

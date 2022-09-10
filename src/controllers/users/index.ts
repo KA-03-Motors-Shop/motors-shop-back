@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
+import { request } from 'http';
 import { createUserService } from '../../services/users/createUser.service';
+import deleteUserService from '../../services/users/deleteUser.service';
 import { listOneUserService } from '../../services/users/listOneUser.service';
 import { listUserService } from '../../services/users/listUsers.service';
 import { loginService } from '../../services/users/login.service';
@@ -96,5 +98,16 @@ export class UsersController {
 		});
 
 		return res.status(200).json(patchedUser);
+	}
+
+	static async delete(req: Request, res: Response) {
+		const { id } = req.params;
+		const userEmail = req.userEmail as string;
+
+		const deleteUser = new deleteUserService()
+
+		await deleteUser.execute({id, userEmail})
+
+		return res.status(200).json()
 	}
 }

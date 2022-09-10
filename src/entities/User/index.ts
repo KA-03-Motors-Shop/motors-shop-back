@@ -66,6 +66,7 @@ export class User {
 
 	@OneToMany((type) => Vehicle, (vehicle) => vehicle.user, {
 		eager: true,
+		cascade: true,
 	})
 	vehicles: Vehicle[];
 

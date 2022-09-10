@@ -3,6 +3,7 @@ import { createUserService } from '../../services/users/createUser.service';
 import { listOneUserService } from '../../services/users/listOneUser.service';
 import { listUserService } from '../../services/users/listUsers.service';
 import { loginService } from '../../services/users/login.service';
+import PatchUserService from '../../services/users/updateUser.service';
 
 export class UsersController {
 	static async store(req: Request, res: Response) {
@@ -62,5 +63,30 @@ export class UsersController {
 		const token = await loginService({ email, password });
 
 		return res.status(200).json(token);
+	}
+
+	static async patch(req: Request, res: Response) {
+		const { name, email, cpf, phone, birthDate, description, account_type } =
+			req.body;
+		const { id } = req.params;
+
+		const userEmail = req.userEmail as string;
+
+		const patchUser = new PatchUserService();
+
+		const patchedUser = await patchUser.execute({
+			id,
+			userEmail,
+			name,
+			email,
+			password,
+			cpf,
+			phone,
+			birthDate,
+			description,
+			account_type,
+		});
+
+		return res.status(200).json(patchedUser);
 	}
 }

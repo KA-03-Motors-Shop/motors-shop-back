@@ -1,6 +1,6 @@
 import { User } from '../../entities/User';
 import { AppError } from '../../errors';
-import { UserCreation } from '../../interfaces/User/user.interface';
+import { IUserCreation } from '../../interfaces/User/user.interface';
 import bcrypt from 'bcrypt';
 import userRepository from '../../repositories/userRepository';
 
@@ -20,7 +20,7 @@ export const createUserService = async ({
 	address_number,
 	complement,
 	color,
-}: UserCreation) => {
+}: IUserCreation) => {
 	const userAlreadyExists = await userRepository.findOneBy({ email });
 
 	if (userAlreadyExists) {

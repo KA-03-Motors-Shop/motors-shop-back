@@ -66,8 +66,16 @@ export class UsersController {
 	}
 
 	static async patch(req: Request, res: Response) {
-		const { name, email, cpf, phone, birthDate, description, account_type } =
-			req.body;
+		const {
+			name,
+			email,
+			password,
+			cpf,
+			phone,
+			birthDate,
+			description,
+			account_type,
+		} = req.body;
 		const { id } = req.params;
 
 		const userEmail = req.userEmail as string;

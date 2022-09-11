@@ -11,7 +11,7 @@
 			"description": "API de test"
 		},
 		{
-			"url": "https://ka-03-motors-shop.herokuapp.com/",
+			"url": "https://ka-03-motors-shop-api.herokuapp.com",
 			"description": "Produção"
 		}
 	],
@@ -213,6 +213,113 @@
 						}
 					}
 				}
+			},
+			"patch": {
+				"description": "Atualizar os dados de um usuário. Todos os campos são opcionais.",
+				"summary": "Atualiza um usuário",
+				"tags": ["Users"],
+				"secutiry": [{ "bearerAuth": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "Id do usuário para busca",
+						"required": true
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"$ref": "#/components/schemas/UpdateUser"
+							}
+						}
+					}
+				},
+				"responses": {
+					"404": { "description": "User not found" },
+					"400": {
+						"description": "Invalid email, please try a diferent one OR Please provide a different password than the current one"
+					},
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/Users"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"description": "Exclui um usuário",
+				"summary": "Exclui um usuário",
+				"tags": ["Users"],
+				"secutiry": [{ "bearerAuth": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "Id do usuário para busca",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": { "description": "OK" },
+					"404": {
+						"description": "User not found"
+					}
+				}
+			}
+		},
+		"/users/login": {
+			"post": {
+				"description": "Efetuar o login e recuperar token de acesso",
+				"summary": "Login de usuário",
+				"tags": ["Users"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"email": { "type": "string" },
+									"password": { "type": "string" }
+								}
+							},
+							"examples": {
+								"login": {
+									"value": {
+										"email": "rafael4@email.com",
+										"password": "1234"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"400": {
+						"description": "Email or password incorrect"
+					},
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"AccessToken": { "type": "string" }
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -248,6 +355,19 @@
 					"street": { "type": "string" },
 					"address_number": { "type": "string" },
 					"complement": { "type": "string" }
+				}
+			},
+			"UpdateUser": {
+				"type": "object",
+				"properties": {
+					"name": { "type": "string" },
+					"email": { "type": "string" },
+					"password": { "type": "string" },
+					"cpf": { "type": "string" },
+					"phone": { "type": "string" },
+					"birthDate": { "type": "string" },
+					"description": { "type": "string" },
+					"account_type": { "type": "string" }
 				}
 			}
 		},

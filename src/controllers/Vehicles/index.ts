@@ -17,7 +17,7 @@ export class VehicleController {
 			is_active,
 			images,
 		} = req.body;
-		const token = req.headers.authorization;
+		const userEmail = req.userEmail;
 
 		const vehicle = await createVehicleService(
 			{
@@ -30,7 +30,7 @@ export class VehicleController {
 				vehicle_type,
 				is_active,
 			},
-			token as string,
+			userEmail as string,
 			images
 		);
 

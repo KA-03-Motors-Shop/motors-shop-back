@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import { VehicleController } from '../../controllers/Vehicles';
-import { validatedTokenMiddleware } from '../../middlewares/validatedToken.middleware';
+import { authUserMiddleware } from '../../middlewares/authUser.middleware';
 
 const vehicleRoutes = Router();
 
 vehicleRoutes.get('/', VehicleController.list);
 vehicleRoutes.get('/:id', VehicleController.listOne);
-vehicleRoutes.post('/', validatedTokenMiddleware, VehicleController.store);
+vehicleRoutes.post('/', authUserMiddleware, VehicleController.store);
 
 export default vehicleRoutes;

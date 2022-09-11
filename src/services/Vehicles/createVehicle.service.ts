@@ -1,8 +1,6 @@
 import { Vehicle } from '../../entities/Vehicles';
 import { AppError } from '../../errors';
-import * as jwt from 'jsonwebtoken';
 import { VehicleCreation } from '../../interfaces/Vehicle/vehicle.interface';
-import { dataToken } from '../../interfaces/User/user.interface';
 import userRepository from '../../repositories/userRepository';
 import vehicleRepository from '../../repositories/vehicleRepository';
 import { Image } from '../../entities/Images';
@@ -19,12 +17,10 @@ export const createVehicleService = async (
 		vehicle_type,
 		is_active,
 	}: VehicleCreation,
-	token: string,
+	userEmail: string,
 	images: string[]
 ) => {
-	const tokenDecode = jwt.decode(token) as dataToken;
-
-	const user = await userRepository.findOneBy({ id: tokenDecode.id });
+	const user = await userRepository.findOneBy({ email: userEmail });
 
 	if (user) {
 		try {

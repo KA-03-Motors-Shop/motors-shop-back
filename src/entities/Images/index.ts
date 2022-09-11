@@ -9,7 +9,9 @@ export class Image {
 	@Column({ type: 'text' })
 	url: string;
 
-	@ManyToOne((type) => Vehicle, (vehicle) => vehicle.images)
+	@ManyToOne((type) => Vehicle, (vehicle) => vehicle.images, {
+		onDelete: 'CASCADE',
+	})
 	vehicle: Vehicle;
 
 	constructor(url: string, vehicle: Vehicle) {

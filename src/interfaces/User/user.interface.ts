@@ -1,11 +1,21 @@
 import { User } from '../../entities/User';
 
-export type UserCreation = Omit<User, 'id' | 'createdAt' | 'vehicle'>;
+export type IUserCreation = Omit<
+	User,
+	'id' | 'createdAt' | 'updatedAt' | 'vehicles'
+>;
 
-export type userLogin = Pick<User, 'email' | 'password'>;
+export type IUserLogin = Pick<User, 'email' | 'password'>;
 
-export interface dataToken {
+export interface IUserUpdate {
 	id: string;
-	iat: number;
-	exp: number;
+	userEmail: string;
+	name?: string;
+	email?: string;
+	password?: string;
+	cpf?: string;
+	phone?: string;
+	birthDate?: string;
+	description?: string;
+	account_type?: string;
 }

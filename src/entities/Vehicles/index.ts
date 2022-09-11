@@ -37,10 +37,13 @@ export class Vehicle {
 	@Column({ nullable: false, default: true })
 	is_active: boolean;
 
-	@ManyToOne((type) => User, (user) => user.vehicles)
+	@ManyToOne((type) => User, (user) => user.vehicles, { onDelete: 'CASCADE' })
 	user: User;
 
-	@OneToMany((type) => Image, (images) => images.vehicle, { eager: true })
+	@OneToMany((type) => Image, (images) => images.vehicle, {
+		eager: true,
+		cascade: true,
+	})
 	images: Image;
 
 	constructor(

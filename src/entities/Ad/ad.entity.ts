@@ -5,11 +5,11 @@ import {
 	OneToMany,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Image } from '../Images';
-import { User } from '../User';
+import { Image } from '../Image/image.entity';
+import { User } from '../User/user.entity';
 
 @Entity()
-export class Vehicle {
+export class Ad {
 	@PrimaryGeneratedColumn('uuid')
 	readonly id: string;
 
@@ -37,10 +37,10 @@ export class Vehicle {
 	@Column({ nullable: false, default: true })
 	is_active: boolean;
 
-	@ManyToOne((type) => User, (user) => user.vehicles, { onDelete: 'CASCADE' })
+	@ManyToOne((type) => User, (user) => user.ads, { onDelete: 'CASCADE' })
 	user: User;
 
-	@OneToMany((type) => Image, (images) => images.vehicle, {
+	@OneToMany((type) => Image, (images) => images.ad, {
 		eager: true,
 		cascade: true,
 	})

@@ -1,9 +1,9 @@
-import { Vehicle } from '../../entities/Vehicles';
+import { Vehicle } from '../../entities/Ad/ad.entity';
 import { AppError } from '../../errors';
 import { VehicleCreation } from '../../interfaces/Vehicle/vehicle.interface';
 import userRepository from '../../repositories/userRepository';
 import vehicleRepository from '../../repositories/vehicleRepository';
-import { Image } from '../../entities/Images';
+import { Image } from '../../entities/Image/image.entity';
 import imageRepository from '../../repositories/imageRepository';
 
 export const createVehicleService = async (

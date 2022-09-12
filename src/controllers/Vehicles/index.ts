@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { createVehicleService } from '../../services/Vehicles/createVehicle.service';
-import { listOneVehicleService } from '../../services/Vehicles/listOneVehicle.service';
-import { listVehicleService } from '../../services/Vehicles/listVehicles.service';
-import { listVehiclesByType } from '../../services/Vehicles/listVehiclesByType.service';
+import { createVehicleService } from '../../services/ads/createAd.service';
+import { listOneVehicleService } from '../../services/ads/listOneAd.service';
+import { listVehicleService } from '../../services/ads/listAds.service';
+import { listVehiclesByType } from '../../services/ads/listAdsByType.service';
 
 export class VehicleController {
 	static async store(req: Request, res: Response) {

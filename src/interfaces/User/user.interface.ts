@@ -2,7 +2,7 @@ import { User } from '../../entities/User/user.entity';
 
 export type IUserCreation = Omit<
 	User,
-	'id' | 'createdAt' | 'updatedAt' | 'vehicles'
+	'id' | 'createdAt' | 'updatedAt' | 'ads'
 >;
 
 export type IUserLogin = Pick<User, 'email' | 'password'>;

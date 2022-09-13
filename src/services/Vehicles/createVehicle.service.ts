@@ -1,12 +1,12 @@
-import { Ad } from '../../entities/Ad/ad.entity';
+import { Vehicle } from '../../entities/Vehicles';
 import { AppError } from '../../errors';
-import { AdCreation } from '../../interfaces/Ads/ad.interface';
+import { VehicleCreation } from '../../interfaces/Vehicle/vehicle.interface';
 import userRepository from '../../repositories/userRepository';
-import adRepository from '../../repositories/adRepository';
-import { Image } from '../../entities/Image/image.entity';
+import vehicleRepository from '../../repositories/vehicleRepository';
+import { Image } from '../../entities/Images';
 import imageRepository from '../../repositories/imageRepository';
 
-export const createAdService = async (
+export const createVehicleService = async (
 	{
 		advertisement_type,
 		title,
@@ -16,7 +16,7 @@ export const createAdService = async (
 		description,
 		vehicle_type,
 		is_active,
-	}: AdCreation,
+	}: VehicleCreation,
 	userEmail: string,
 	images: string[]
 ) => {
@@ -24,7 +24,7 @@ export const createAdService = async (
 
 	if (user) {
 		try {
-			const ad = new Ad(
+			const vehicle = new Vehicle(
 				advertisement_type,
 				title,
 				fabrication_year,
@@ -36,14 +36,14 @@ export const createAdService = async (
 				user
 			);
 
-			await adRepository.save(ad);
+			await vehicleRepository.save(vehicle);
 
 			images.forEach(async (img) => {
-				let newImage = new Image(img, ad);
+				let newImage = new Image(img, vehicle);
 				await imageRepository.save(newImage);
 			});
 
-			return { ad: ad, images: images };
+			return { vehicle: vehicle, images: images };
 		} catch (err) {
 			if (err instanceof AppError) {
 				throw new AppError(400, 'vehicle service error');

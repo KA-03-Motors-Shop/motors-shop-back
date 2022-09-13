@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { request } from 'http';
 import { createUserService } from '../../services/users/createUser.service';
 import deleteUserService from '../../services/users/deleteUser.service';
 import { listOneUserService } from '../../services/users/listOneUser.service';
@@ -103,10 +104,10 @@ export class UsersController {
 		const { id } = req.params;
 		const userEmail = req.userEmail as string;
 
-		const deleteUser = new deleteUserService();
+		const deleteUser = new deleteUserService()
 
-		await deleteUser.execute({ id, userEmail });
+		await deleteUser.execute({id, userEmail})
 
-		return res.status(200).json();
+		return res.status(200).json()
 	}
 }

@@ -5,7 +5,7 @@ import {
 	OneToMany,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Ad } from '../Ad/ad.entity';
+import { Vehicle } from '../Vehicles';
 
 @Entity()
 export class User {
@@ -64,11 +64,11 @@ export class User {
 	@Column({ nullable: false, length: 128 })
 	password: string;
 
-	@OneToMany((type) => Ad, (ad) => ad.user, {
+	@OneToMany((type) => Vehicle, (vehicle) => vehicle.user, {
 		eager: true,
 		cascade: true,
 	})
-	ads: Ad[];
+	vehicles: Vehicle[];
 
 	@Column({ nullable: false, length: 32, default: 'var(--random1)' })
 	color: string;

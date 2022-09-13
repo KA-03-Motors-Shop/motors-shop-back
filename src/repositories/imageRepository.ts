@@ -1,5 +1,5 @@
 import { AppDataSource } from '../data-source';
-import { Image } from '../entities/Image/image.entity';
+import { Image } from '../entities/Images';
 
 const imageRepository = AppDataSource.getRepository(Image);
 

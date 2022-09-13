@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { createAdService } from '../../services/ads/createAd.service';
-import { listOneAdService } from '../../services/ads/listOneAd.service';
-import { listAdService } from '../../services/ads/listAds.service';
-import { listAdsByType } from '../../services/ads/listAdsByType.service';
+import { createVehicleService } from '../../services/Vehicles/createVehicle.service';
+import { listOneVehicleService } from '../../services/Vehicles/listOneVehicle.service';
+import { listVehicleService } from '../../services/Vehicles/listVehicles.service';
+import { listVehiclesByType } from '../../services/Vehicles/listVehiclesByType.service';
 
-export class AdController {
+export class VehicleController {
 	static async store(req: Request, res: Response) {
 		const {
 			advertisement_type,
@@ -19,7 +19,7 @@ export class AdController {
 		} = req.body;
 		const userEmail = req.userEmail;
 
-		const vehicle = await createAdService(
+		const vehicle = await createVehicleService(
 			{
 				advertisement_type,
 				title,
@@ -41,19 +41,19 @@ export class AdController {
 		const { type } = req.query;
 
 		if (type) {
-			const vehiclesByType = await listAdsByType(type as string);
+			const vehiclesByType = await listVehiclesByType(type as string);
 
 			return res.status(200).json(vehiclesByType);
 		}
 
-		const vehicles = await listAdService();
+		const vehicles = await listVehicleService();
 
 		return res.status(200).json(vehicles);
 	}
 
 	static async listOne(req: Request, res: Response) {
 		const { id } = req.params;
-		const vehicle = await listOneAdService(id);
+		const vehicle = await listOneVehicleService(id);
 
 		return res.status(200).json(vehicle);
 	}

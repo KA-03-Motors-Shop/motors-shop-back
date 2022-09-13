@@ -1,6 +1,6 @@
 import { Express } from 'express';
 import userRoutes from './users';
-import vehicleRoutes from './Ads';
+import vehicleRoutes from './Vehicles';
 
 export const useRoutes = (app: Express) => {
 	app.use('/vehicles', vehicleRoutes);

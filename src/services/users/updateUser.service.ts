@@ -1,4 +1,4 @@
-import { User } from '../../entities/User/user.entity';
+import { User } from '../../entities/User';
 import { AppError } from '../../errors';
 import { IUserUpdate } from '../../interfaces/User/user.interface';
 import userRepository from '../../repositories/userRepository';
@@ -66,8 +66,6 @@ export default class PatchUserService {
 		if (account_type) {
 			foundUser.account_type = account_type;
 		}
-
-		foundUser.updatedAt = new Date();
 
 		await userRepository.save(foundUser);
 

@@ -1,4 +1,4 @@
-import { User } from '../../entities/User/user.entity';
+import { User } from '../../entities/User';
 import { AppError } from '../../errors';
 import { IUserCreation } from '../../interfaces/User/user.interface';
 import bcrypt from 'bcrypt';

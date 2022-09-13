@@ -1,6 +1,6 @@
-import vehicleRepository from '../../repositories/vehicleRepository';
+import adRepository from '../../repositories/adRepository';
 
-export const listVehicleService = async () => {
-	const vehicles = await vehicleRepository.find();
-	return vehicles;
+export const listAdService = async () => {
+	const ads = await adRepository.find();
+	return ads;
 };

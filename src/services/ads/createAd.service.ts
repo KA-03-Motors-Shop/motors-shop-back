@@ -1,12 +1,12 @@
 import { Ad } from '../../entities/Ad/ad.entity';
 import { AppError } from '../../errors';
-import { VehicleCreation } from '../../interfaces/Vehicle/vehicle.interface';
+import { AdCreation } from '../../interfaces/Ads/ad.interface';
 import userRepository from '../../repositories/userRepository';
-import vehicleRepository from '../../repositories/vehicleRepository';
+import adRepository from '../../repositories/adRepository';
 import { Image } from '../../entities/Image/image.entity';
 import imageRepository from '../../repositories/imageRepository';
 
-export const createVehicleService = async (
+export const createAdService = async (
 	{
 		advertisement_type,
 		title,
@@ -16,7 +16,7 @@ export const createVehicleService = async (
 		description,
 		vehicle_type,
 		is_active,
-	}: VehicleCreation,
+	}: AdCreation,
 	userEmail: string,
 	images: string[]
 ) => {
@@ -36,7 +36,7 @@ export const createVehicleService = async (
 				user
 			);
 
-			await vehicleRepository.save(ad);
+			await adRepository.save(ad);
 
 			images.forEach(async (img) => {
 				let newImage = new Image(img, ad);

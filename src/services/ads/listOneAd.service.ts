@@ -1,11 +1,11 @@
 import { AppError } from '../../errors';
-import vehicleRepository from "../../repositories/vehicleRepository";
+import adRepository from '../../repositories/adRepository';
 
-export const listOneVehicleService = async (id: string) => {
-	const vehicle = await vehicleRepository.findOneBy({ id: id });
+export const listOneAdService = async (id: string) => {
+	const ad = await adRepository.findOneBy({ id: id });
 
-	if (!vehicle) {
-		throw new AppError(404, "Vehicle not found or doesn't exists");
+	if (!ad) {
+		throw new AppError(404, "Advertisement not found or doesn't exists");
 	}
-	return vehicle;
+	return ad;
 };

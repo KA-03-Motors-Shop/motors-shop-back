@@ -1,9 +1,9 @@
-import vehicleRepository from '../../repositories/vehicleRepository';
+import adRepository from '../../repositories/adRepository';
 
-export const listVehiclesByType = async (type: string) => {
-	const vehiclesByType = await vehicleRepository.find({
+export const listAdsByType = async (type: string) => {
+	const adsByType = await adRepository.find({
 		where: { vehicle_type: type },
 	});
 
-	return vehiclesByType;
+	return adsByType;
 };

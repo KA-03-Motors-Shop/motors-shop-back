@@ -1,9 +1,9 @@
-import { Vehicle } from '../../entities/Vehicles';
+import { Ad } from '../../entities/Ad/ad.entity';
 import { AppError } from '../../errors';
 import { VehicleCreation } from '../../interfaces/Vehicle/vehicle.interface';
 import userRepository from '../../repositories/userRepository';
 import vehicleRepository from '../../repositories/vehicleRepository';
-import { Image } from '../../entities/Images';
+import { Image } from '../../entities/Image/image.entity';
 import imageRepository from '../../repositories/imageRepository';
 
 export const createVehicleService = async (
@@ -24,7 +24,7 @@ export const createVehicleService = async (
 
 	if (user) {
 		try {
-			const vehicle = new Vehicle(
+			const ad = new Ad(
 				advertisement_type,
 				title,
 				fabrication_year,
@@ -36,14 +36,14 @@ export const createVehicleService = async (
 				user
 			);
 
-			await vehicleRepository.save(vehicle);
+			await vehicleRepository.save(ad);
 
 			images.forEach(async (img) => {
-				let newImage = new Image(img, vehicle);
+				let newImage = new Image(img, ad);
 				await imageRepository.save(newImage);
 			});
 
-			return { vehicle: vehicle, images: images };
+			return { ad: ad, images: images };
 		} catch (err) {
 			if (err instanceof AppError) {
 				throw new AppError(400, 'vehicle service error');

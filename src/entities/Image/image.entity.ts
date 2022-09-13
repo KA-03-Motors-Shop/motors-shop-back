@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Vehicle } from '../Vehicles';
+import { Ad } from '../Ad/ad.entity';
 
 @Entity()
 export class Image {
@@ -9,13 +9,13 @@ export class Image {
 	@Column({ type: 'text' })
 	url: string;
 
-	@ManyToOne((type) => Vehicle, (vehicle) => vehicle.images, {
+	@ManyToOne((type) => Ad, (ad) => ad.images, {
 		onDelete: 'CASCADE',
 	})
-	vehicle: Vehicle;
+	ad: Ad;
 
-	constructor(url: string, vehicle: Vehicle) {
+	constructor(url: string, ad: Ad) {
 		this.url = url;
-		this.vehicle = vehicle;
+		this.ad = ad;
 	}
 }

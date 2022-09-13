@@ -1,5 +1,5 @@
 import { AppDataSource } from '../data-source';
-import { Vehicle } from '../entities/Vehicles';
+import { Vehicle } from '../entities/Ad/ad.entity';
 
 const vehicleRepository = AppDataSource.getRepository(Vehicle);
 

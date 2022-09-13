@@ -45,12 +45,14 @@ if (process.env.NODE_ENV === 'production') {
 
 export const AppDataSource = new DataSource(currentDataSourceOptions);
 
-if (process.env.NODE_ENV !== 'test') {
-	AppDataSource.initialize()
-		.then(() => {
-			console.log('Data source initialized');
-		})
-		.catch((err) => {
-			console.log('Error during the Data Source initialization', err);
-		});
-}
+async () => {
+	if (process.env.NODE_ENV !== 'test') {
+		await AppDataSource.initialize()
+			.then(() => {
+				console.log('Data source initialized');
+			})
+			.catch((err) => {
+				console.log('Error during the Data Source initialization', err);
+			});
+	}
+};
